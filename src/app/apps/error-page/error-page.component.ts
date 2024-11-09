@@ -16,6 +16,10 @@ export class ErrorPageComponent {
   error!: ErrorItemType;
 
   constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe((params) => {
+      console.log(params);
+    });
+
     this.activatedRoute.queryParams.subscribe((params) => {
       console.log(params);
       try {
