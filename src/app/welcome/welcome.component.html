@@ -1,11 +1,15 @@
 <div class="app-window">
   <div class="body">
     <div class="container">
-      <img class="logo mat-elevation-z2" src="/assets/logo.jpg" alt="Logo" />
+      <div class="info">
+        <img class="logo mat-elevation-z2" src="assets/logo.jpg" alt="Logo" />
+        <div class="app-name">PHH Proxy</div>
+      </div>
 
-      <div class="app-name">PHH Proxy</div>
-
-      <mat-spinner [diameter]="56"></mat-spinner>
+      <div class="loading">
+        <mat-spinner [diameter]="56"></mat-spinner>
+        <span>Connecting to PHH Web Platform...</span>
+      </div>
     </div>
   </div>
 
