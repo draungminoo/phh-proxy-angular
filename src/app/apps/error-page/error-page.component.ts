@@ -21,6 +21,9 @@ export class ErrorPageComponent {
     });
 
     this.activatedRoute.queryParams.subscribe((params) => {
+      const pp = new URLSearchParams(window.location.search);
+      console.log(pp); // Output: 'example'
+
       console.log(params);
       try {
         const obj: any = JSON.parse(params['query']);
