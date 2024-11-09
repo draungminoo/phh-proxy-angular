@@ -1,6 +1,6 @@
 {
   "name": "phh-proxy-angular",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/win/main.js",
   "scripts": {
     "ng": "ng",
