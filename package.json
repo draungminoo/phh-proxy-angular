@@ -1,6 +1,6 @@
 {
   "name": "phh-proxy-angular",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "dist/win/main.js",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,6 @@
     "git:clean": "git add --all && git commit -m \"Publish App\" & git push origin master",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-
     "publish": "npm run build && rimraf ../PHH_PROXY/public && copyfiles -u 1 dist/browser/**/* ../PHH_PROXY/public && copyfiles -u 1 dist/3rdpartylicenses.txt ../PHH_PROXY/public/3rdpartylicenses.txt",
     "v:major": "npm version major",
     "v:minor": "npm version minor",
