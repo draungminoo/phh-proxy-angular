@@ -7,9 +7,9 @@
     <div class="container">
       <div class="error-container">
         <h4>{{ error.name }}</h4>
-        <span>ERROR: {{ error.description }}</span>
-        <span>{{ error.validatedUrl }}</span>
-        <p>{{ version }}</p>
+        <span>ERROR: {{ error.description }} ({{ error.code }})</span>
+        <span>Validated URL: {{ error.validatedUrl }}</span>
+        <p>App Version: {{ error.version }}</p>
       </div>
 
       <button mat-flat-button (click)="refreshPage()">REFRESH</button>

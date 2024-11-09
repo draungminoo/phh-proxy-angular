@@ -4,7 +4,7 @@
   "main": "dist/win/main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 1900",
     "build": "ng build",
     "git:clean": "git add --all && git commit -m \"Publish App\" & git push origin master",
     "watch": "ng build --watch --configuration development",

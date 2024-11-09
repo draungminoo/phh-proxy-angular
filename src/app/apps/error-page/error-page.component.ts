@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
 import { ErrorItemType } from './error-page.type';
 
 @Component({
@@ -12,15 +13,26 @@ import { ErrorItemType } from './error-page.type';
   imports: [MatButtonModule, MatIconModule],
 })
 export class ErrorPageComponent {
-  error: ErrorItemType = {
-    name: 'Error',
-    description: 'Something went wrong',
-    validatedUrl: 'https://punhlainghospitals.com',
-  };
+  error!: ErrorItemType;
 
-  version: string = '';
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      try {
+        const obj: any = JSON.parse(params['query']);
+        console.log(obj);
 
-  constructor() {}
+        this.error = obj;
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
 
-  refreshPage() {}
+  refreshPage() {
+    if (this.error.reloadUrl == '-') {
+      window.bridge?.loadProxyConfiguration();
+    } else {
+      window.location.href = this.error.reloadUrl;
+    }
+  }
 }

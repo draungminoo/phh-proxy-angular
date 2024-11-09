@@ -13,7 +13,14 @@ export class FooterComponent {
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.version = params['version'];
+      try {
+        const obj: any = JSON.parse(params['query']);
+        console.log(obj);
+
+        this.version = obj?.version;
+      } catch (error) {
+        console.log(error);
+      }
     });
   }
 }
