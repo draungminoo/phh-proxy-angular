@@ -31,7 +31,7 @@ export class AppsListComponent {
     {
       name: 'WhatsApp',
       imageUrl: 'https://web.whatsapp.com/favicon.ico',
-      url: 'https://web.whatsapp.com',
+      url: 'https://www.facebook.com',
     },
   ];
 
@@ -42,10 +42,6 @@ export class AppsListComponent {
       panelClass: 'loading-dialog',
     });
     dialog.disableClose = true;
-
-    setTimeout(() => {
-      window.location.href = url;
-      dialog.close();
-    }, 1000);
+    window.bridge.loadUrl(url);
   }
 }
