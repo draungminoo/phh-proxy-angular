@@ -1,0 +1,18 @@
+<div class="app-window">
+  <div class="header">
+    <div class="title"></div>
+  </div>
+
+  <div class="body">
+    <div class="container">
+      <div class="error-container">
+        <h4>{{ error.name }}</h4>
+        <span>ERROR: {{ error.description }}</span>
+        <span>{{ error.validatedUrl }}</span>
+        <p>{{ version }}</p>
+      </div>
+
+      <button mat-flat-button (click)="refreshPage()">REFRESH</button>
+    </div>
+  </div>
+</div>

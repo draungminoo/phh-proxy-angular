@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
+import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
   selector: 'app-welcome',
@@ -8,7 +9,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './welcome.component.scss',
   host: { class: 'app-host' },
   standalone: true,
-  imports: [MatProgressSpinnerModule],
+  imports: [
+    // Modules
+    MatProgressSpinnerModule,
+
+    // Components
+    FooterComponent,
+  ],
 })
 export class WelcomeComponent {
   version: string = '1.0.2';

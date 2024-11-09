@@ -1,0 +1,19 @@
+<div class="app-window">
+  <div class="header">
+    <div class="title">Available Apps</div>
+  </div>
+
+  <div class="body">
+    <div class="container">
+      @for (item of appsList; track $index) {
+        <app-app-item
+          class="app-item mat-elevation-z2"
+          [item]="item"
+          (click)="loadUrl(item.url)"
+        ></app-app-item>
+      }
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>
