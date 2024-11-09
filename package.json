@@ -9,13 +9,13 @@
     "git:clean": "git add --all && git commit -m \"Publish App\" & git push origin master",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "publish": "npm run build && rimraf ../PHH_PROXY/public && copyfiles -u 1 dist/browser/**/* ../PHH_PROXY/public && copyfiles -u 1 dist/3rdpartylicenses.txt ../PHH_PROXY/public/3rdpartylicenses.txt",
+    "publish": "npm run build && rimraf ../PHH_PROXY/public && copyfiles -u 2 dist/browser/**/* ../PHH_PROXY/public && copyfiles -u 1 dist/3rdpartylicenses.txt ../PHH_PROXY/public",
     "v:major": "npm version major",
     "v:minor": "npm version minor",
     "v:patch": "npm version patch",
-    "publish:major": "npm run git:clean & npm run v:major && npm run build && npm run publish",
-    "publish:minor": "npm run git:clean & npm run v:minor && npm run build && npm run publish",
-    "publish:patch": "npm run git:clean & npm run v:patch && npm run build && npm run publish"
+    "publish:major": "npm run git:clean & npm run v:major && npm run publish",
+    "publish:minor": "npm run git:clean & npm run v:minor && npm run publish",
+    "publish:patch": "npm run git:clean & npm run v:patch && npm run publish"
   },
   "private": true,
   "dependencies": {
