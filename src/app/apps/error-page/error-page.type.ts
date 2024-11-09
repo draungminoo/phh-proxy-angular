@@ -2,7 +2,7 @@ export type ErrorItemType = {
   name: string;
   description: string;
   code: string;
-  validatedUrl: string;
+  validatedURL: string;
   reloadUrl: string;
   version: string;
 };

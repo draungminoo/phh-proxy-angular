@@ -3,6 +3,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { ErrorItemType } from './error-page.type';
+import { onComponentDestroy } from '../../../resources/tools/on-destroy.task';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-error-page',
@@ -15,25 +17,22 @@ import { ErrorItemType } from './error-page.type';
 export class ErrorPageComponent {
   error!: ErrorItemType;
 
+  private onDestroy = onComponentDestroy();
+
   constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.params.subscribe((params) => {
-      console.log(params);
-    });
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.onDestroy))
+      .subscribe((params) => {
+        console.log(params);
+        try {
+          const obj: any = JSON.parse(params['query']);
+          console.log(obj);
 
-    this.activatedRoute.queryParams.subscribe((params) => {
-      const pp = new URLSearchParams(window.location.search);
-      console.log(pp); // Output: 'example'
-
-      console.log(params);
-      try {
-        const obj: any = JSON.parse(params['query']);
-        console.log(obj);
-
-        this.error = obj;
-      } catch (error) {
-        console.log(error);
-      }
-    });
+          this.error = obj;
+        } catch (error) {
+          console.log(error);
+        }
+      });
   }
 
   refreshPage() {
