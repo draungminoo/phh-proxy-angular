@@ -17,6 +17,7 @@ export class ErrorPageComponent {
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.activatedRoute.queryParams.subscribe((params) => {
+      console.log(params);
       try {
         const obj: any = JSON.parse(params['query']);
         console.log(obj);
