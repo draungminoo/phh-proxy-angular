@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@use './resources/styles/app/app.window.scss';
+
+html {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
