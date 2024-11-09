@@ -1,6 +1,33 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { BrowserWindow, app } from 'electron';
+import { createWindow, getMainWindow } from './win/main.window';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+const gotThreadLock = app.requestSingleInstanceLock();
+
+if (!gotThreadLock) {
+  app.quit();
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    // Focus the first instance when a second instance is attempted
+    const mainWindow = getMainWindow();
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+
+  app.whenReady().then(() => {
+    createWindow();
+  });
+}
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+app.on('activate', () => {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+});

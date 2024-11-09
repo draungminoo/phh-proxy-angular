@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/phh_proxy_angular",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "browser": "src/main-ng.ts",
             "polyfills": [
               "zone.js"
             ],
