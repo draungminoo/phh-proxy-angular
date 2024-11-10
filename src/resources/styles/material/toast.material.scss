@@ -1,0 +1,25 @@
+// toast design
+
+// success toast
+.success-toast {
+  .mdc-snackbar__surface {
+    background-color: green !important;
+    color: white;
+  }
+}
+
+// error toast
+.error-toast {
+  .mdc-snackbar__surface {
+    background-color: red !important;
+    color: white;
+  }
+}
+
+// warning toast
+.warning-toast {
+  .mdc-snackbar__surface {
+    background-color: darkorange !important;
+    color: white;
+  }
+}

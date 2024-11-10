@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs';
-import { onComponentDestroy } from '../../../resources/tools/on-destroy.task';
+import { Router } from '@angular/router';
+import { AppStorageKeyEnums } from '../../../resources/enums/app-storage-key.enum';
 import { ErrorItemType } from './error-page.type';
 
 @Component({
@@ -16,33 +15,39 @@ import { ErrorItemType } from './error-page.type';
   imports: [MatButtonModule, MatIconModule, MatProgressSpinnerModule],
 })
 export class ErrorPageComponent {
-  error!: ErrorItemType;
+  error: ErrorItemType | null = null;
   connectingPage: boolean = false;
+  loadingMessage: string = '';
 
-  private onDestroy = onComponentDestroy();
-
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParams
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe((params) => {
-        console.log(params);
-        try {
-          const obj: any = JSON.parse(params['query']);
-          console.log(obj);
-
-          this.error = obj;
-        } catch (error) {
-          console.log(error);
-        }
-      });
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+  ) {
+    window.bridge.getPageData('error', (data) => {
+      console.log(data);
+      this.error = data as any;
+      this.cdr.detectChanges();
+    });
   }
 
   refreshPage() {
-    if (this.error.reloadUrl == '-') {
-      window.bridge?.loadProxyConfiguration();
+    this.connectingPage = true;
+
+    if (!this.error || this.error.reloadUrl == '-') {
+      this.loadingMessage = 'Reloading...';
+      window.bridge.getItem(
+        AppStorageKeyEnums.LOCAL_PROXY_TOKEN,
+        (token) => {
+          window.bridge?.loadProxyConfiguration(token);
+        },
+        (error) => {
+          console.log(error);
+          this.router.navigate(['welcome']);
+        },
+      );
     } else {
-      this.connectingPage = true;
-      window.location.href = this.error.reloadUrl;
+      this.loadingMessage = `Reconnecting to ${this.error?.validatedURL}`;
+      window.location.href = this.error?.reloadUrl ?? '';
     }
   }
 }

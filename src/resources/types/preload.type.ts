@@ -26,7 +26,7 @@ export type ElectronPreloadType = {
 
   // load
   loadUrl: (url: string) => void;
-  loadProxyConfiguration: () => void;
+  loadProxyConfiguration: (token: string) => void;
 
   // proxy token
   requestProxyToken: (
@@ -44,6 +44,21 @@ export type ElectronPreloadType = {
   getDeviceInfo: (
     success?: (...args: any[]) => any,
     error?: (...args: any[]) => any,
+  ) => void;
+
+  // app menu
+  showAppMenu: (status: boolean) => void;
+
+  // page data
+  setPageData: (page: string, data: Record<string, any>) => void;
+  getPageData: (
+    page: string,
+    success?: (data: Record<string, any>) => any,
+  ) => void;
+  setPageKeyData: (
+    page: string,
+    key: string,
+    data: Record<string, any>,
   ) => void;
 
   // default send and receive

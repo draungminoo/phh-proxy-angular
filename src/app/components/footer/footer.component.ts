@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { onComponentDestroy } from '../../../resources/tools/on-destroy.task';
 import { takeUntil } from 'rxjs';
@@ -11,22 +11,11 @@ import { takeUntil } from 'rxjs';
   imports: [],
 })
 export class FooterComponent {
-  version: string = '';
+  pageData: Record<string, any> = {};
 
-  private onDestroy = onComponentDestroy();
-
-  constructor(private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.queryParams
-      .pipe(takeUntil(this.onDestroy))
-      .subscribe((params) => {
-        try {
-          const obj: any = JSON.parse(params['query']);
-          console.log(obj);
-
-          this.version = obj?.version;
-        } catch (error) {
-          console.log(error);
-        }
-      });
+  constructor(private cdr: ChangeDetectorRef) {
+    window.bridge.getPageData('footer', (data) => {
+      this.pageData = data;
+    });
   }
 }

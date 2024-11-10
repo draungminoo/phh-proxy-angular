@@ -7,14 +7,14 @@
     @if (connectingPage) {
       <mat-spinner></mat-spinner>
       <br />
-      <span>Reconnecting to {{ error.reloadUrl }}</span>
+      <span>{{ loadingMessage }}</span>
     } @else {
       <div class="container">
         <div class="error-container">
-          <h4>{{ error.name }}</h4>
-          <span>ERROR: {{ error.description }} ({{ error.code }})</span>
-          <span>Validated URL: {{ error.validatedURL }}</span>
-          <p>App Version: {{ error.version }}</p>
+          <h4>{{ error?.name }}</h4>
+          <span>ERROR: {{ error?.description }} ({{ error?.code }})</span>
+          <span>Validated URL: {{ error?.validatedURL }}</span>
+          <p>App Version: {{ error?.version }}</p>
         </div>
 
         <button mat-flat-button (click)="refreshPage()">REFRESH</button>

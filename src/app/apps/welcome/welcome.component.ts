@@ -7,8 +7,8 @@ import { AppStorageKeyEnums } from '../../../resources/enums/app-storage-key.enu
 import { FooterComponent } from '../../components/footer/footer.component';
 import { CryptoJsService } from '../../services/cryptojs/cryptojs.service';
 import { DialogService } from '../../services/dialog/dialog.service';
-import { ProxyTokenReturnType } from './welcome.type';
 import { DisplayIdentifierKeyComponent } from './components/display-identifier-key/display-identifier-key.component';
+import { ProxyTokenReturnType } from './welcome.type';
 
 @Component({
   selector: 'app-welcome',
@@ -37,6 +37,7 @@ export class WelcomeComponent {
     private dialogService: DialogService,
   ) {
     this.checkLocalToken();
+    window.bridge.showAppMenu(false);
   }
 
   checkLocalToken() {
@@ -47,7 +48,7 @@ export class WelcomeComponent {
       window.bridge.getItem(
         AppStorageKeyEnums.LOCAL_PROXY_TOKEN,
         (token) => {
-          console.log(token);
+          this.proceedWithToken(token);
         },
         (error) => {
           console.error(error);
@@ -120,9 +121,14 @@ export class WelcomeComponent {
     window.bridge.requestProxyToken(
       identifierKey,
       (data: ProxyTokenReturnType) => {
-        this.isLoading = false;
-        this.cdr.detectChanges();
-        console.log(data);
+        // save token
+        window.bridge.setItem({
+          key: AppStorageKeyEnums.LOCAL_PROXY_TOKEN,
+          data: data.token,
+        });
+
+        // proceed with token
+        this.proceedWithToken(data.token);
       },
       (error) => {
         console.error(error);
@@ -130,5 +136,9 @@ export class WelcomeComponent {
         this.cdr.detectChanges();
       },
     );
+  }
+
+  private proceedWithToken(token: string) {
+    window.bridge.loadProxyConfiguration(token);
   }
 }

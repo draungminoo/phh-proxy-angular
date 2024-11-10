@@ -35,7 +35,9 @@ export class AppsListComponent {
   connectingApp: boolean = false;
   connectingAppUrl: string = '';
 
-  constructor() {}
+  constructor() {
+    window.bridge.showAppMenu(true);
+  }
 
   loadUrl(url: string) {
     this.connectingApp = true;

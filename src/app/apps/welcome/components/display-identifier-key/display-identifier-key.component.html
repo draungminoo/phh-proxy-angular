@@ -6,19 +6,19 @@
         <table>
           <tr>
             <td>Hostname</td>
-            <td>{{ deviceInfo?.hostname }}</td>
+            <td>{{ deviceInfo?.hostname ?? '-' }}</td>
           </tr>
           <tr>
             <td>Username</td>
-            <td>{{ deviceInfo?.username }}</td>
+            <td>{{ deviceInfo?.username ?? '-'  }}</td>
           </tr>
           <tr>
             <td>Version</td>
-            <td>{{ deviceInfo?.version }}</td>
+            <td>{{ deviceInfo?.version ?? '-'  }}</td>
           </tr>
           <tr>
             <td>Release</td>
-            <td>{{ deviceInfo?.release }}</td>
+            <td>{{ deviceInfo?.release ?? '-'  }}</td>
           </tr>
         </table>
       </div>
