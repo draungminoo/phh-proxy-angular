@@ -14,7 +14,7 @@ import { AppItemType } from '../../apps-list.type';
   standalone: true,
   imports: [],
 })
-export class AppItemComponent implements OnChanges, AfterViewInit {
+export class AppItemComponent implements OnChanges {
   @Input() item!: AppItemType;
 
   constructor() {}
@@ -25,9 +25,5 @@ export class AppItemComponent implements OnChanges, AfterViewInit {
         (this as any)[key] = changes[key].currentValue;
       }
     }
-  }
-
-  ngAfterViewInit() {
-    //
   }
 }

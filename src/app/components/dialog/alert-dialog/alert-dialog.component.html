@@ -1,0 +1,17 @@
+<div class="alert-dialog">
+  <h1 mat-dialog-title>{{ dialogData.title }}</h1>
+
+  <mat-dialog-content class="dialog-content">{{
+    dialogData.message
+  }}</mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      mat-dialog-close
+      [color]="dialogData.status || 'primary'"
+    >
+      OK
+    </button>
+  </mat-dialog-actions>
+</div>

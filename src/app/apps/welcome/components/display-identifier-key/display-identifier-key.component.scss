@@ -1,0 +1,74 @@
+.app-window {
+  .header {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+
+    .title {
+      font-size: x-large;
+      font-weight: bold;
+    }
+  }
+
+  .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding: 16px;
+      width: 500px;
+
+      .device-info {
+        flex: 1;
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          th,
+          td {
+            padding: 8px;
+            border: 1px solid;
+          }
+        }
+      }
+
+      .key-container {
+        display: flex;
+        flex-direction: column;
+
+        .segment-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 16px;
+
+          .segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            padding: 8px;
+            width: 20%;
+            min-width: fit-content;
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    gap: 16px;
+  }
+}

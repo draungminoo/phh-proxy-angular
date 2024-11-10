@@ -3,6 +3,7 @@
     class="image"
     src="{{ item.imageUrl || 'assets/logo.jpg' }}"
     alt="Image"
+    (error)="item.imageUrl = 'assets/logo.jpg'"
   />
   <div class="name">{{ item.name }}</div>
 </div>

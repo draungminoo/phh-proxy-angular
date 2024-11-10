@@ -1,13 +1,9 @@
 import { Component, inject } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { AppItemType } from './apps-list.type';
 import { AppItemComponent } from './components/app-item/app-item.component';
-import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-apps-list',
@@ -18,6 +14,7 @@ import { LoadingComponent } from '../../components/loading/loading.component';
   imports: [
     // Modules
     MatDialogModule,
+    MatProgressSpinnerModule,
 
     // Components
     FooterComponent,
@@ -35,13 +32,14 @@ export class AppsListComponent {
     },
   ];
 
+  connectingApp: boolean = false;
+  connectingAppUrl: string = '';
+
   constructor() {}
 
   loadUrl(url: string) {
-    const dialog = this.loadingDialog.open(LoadingComponent, {
-      panelClass: 'loading-dialog',
-    });
-    dialog.disableClose = true;
+    this.connectingApp = true;
+    this.connectingAppUrl = url;
     window.bridge.loadUrl(url);
   }
 }

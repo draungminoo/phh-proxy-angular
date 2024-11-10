@@ -1,0 +1,9 @@
+.alert-dialog {
+    width: fit-content;
+    min-width: 300px;
+    max-width: 700px;
+
+    .dialog-content {
+        white-space: pre-wrap;
+    }
+}

@@ -1,0 +1,51 @@
+<div class="app-window">
+  <div class="body">
+    <div class="container">
+      <div class="device-info">
+        <h5>Device Info</h5>
+        <table>
+          <tr>
+            <td>Hostname</td>
+            <td>{{ deviceInfo?.hostname }}</td>
+          </tr>
+          <tr>
+            <td>Username</td>
+            <td>{{ deviceInfo?.username }}</td>
+          </tr>
+          <tr>
+            <td>Version</td>
+            <td>{{ deviceInfo?.version }}</td>
+          </tr>
+          <tr>
+            <td>Release</td>
+            <td>{{ deviceInfo?.release }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="key-container">
+        <h5>Identifier Key</h5>
+        <div class="segment-container">
+          @for (segment of keySegments; track $index) {
+            <div class="segment mat-elevation-z2">
+              {{ segment }}
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="spacer"></div>
+    <button
+      mat-flat-button
+      matDialogClose
+      #closeDialogButton
+      color="warn"
+      (click)="abortRequest()"
+    >
+      ABORT REQUEST {{ remainingTime ? '(' + remainingTime + ')' : '' }}
+    </button>
+  </div>
+</div>

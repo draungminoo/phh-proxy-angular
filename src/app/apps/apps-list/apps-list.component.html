@@ -5,12 +5,19 @@
 
   <div class="body">
     <div class="container">
-      @for (item of appsList; track $index) {
-        <app-app-item
-          class="app-item mat-elevation-z2"
-          [item]="item"
-          (click)="loadUrl(item.url)"
-        ></app-app-item>
+      @if (connectingApp) {
+        <div class="loading">
+          <mat-spinner></mat-spinner>
+          <span>Connecting to {{ connectingAppUrl }}</span>
+        </div>
+      } @else {
+        @for (item of appsList; track $index) {
+          <app-app-item
+            class="app-item mat-elevation-z2"
+            [item]="item"
+            (click)="loadUrl(item.url)"
+          ></app-app-item>
+        }
       }
     </div>
   </div>

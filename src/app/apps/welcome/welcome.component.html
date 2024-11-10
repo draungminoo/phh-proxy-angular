@@ -6,10 +6,24 @@
         <div class="app-name">PHH Proxy</div>
       </div>
 
-      <div class="loading">
-        <mat-spinner [diameter]="56"></mat-spinner>
-        <span>Connecting to PHH Web Platform...</span>
-      </div>
+      @if (isLoading) {
+        <div class="loading">
+          <mat-spinner [diameter]="56"></mat-spinner>
+          <span>{{ message }}</span>
+        </div>
+      } @else {
+        <!-- Local token is not found -->
+        <div class="request-token">
+          <button
+            mat-flat-button
+            matTooltip="Request private token to PHH Web Platform to use PHH Proxy."
+            (click)="requestProxyToken()"
+          >
+            <mat-icon>vpn_key</mat-icon>
+            REQUEST TOKEN
+          </button>
+        </div>
+      }
     </div>
   </div>
 

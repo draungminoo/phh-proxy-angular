@@ -1,0 +1,38 @@
+<div class="confirm-dialog">
+  <h1 mat-dialog-title>{{ dialogData.title }}</h1>
+
+  <div mat-dialog-content class="dialog-content">{{ dialogData.message }}</div>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      color="primary"
+      *ngIf="dialogData.neutralAction || dialogData.neutralText"
+      (click)="dialogData.neutralAction ? dialogData.neutralAction() : ''"
+    >
+      {{ dialogData.neutralText || 'Neutral' }}
+    </button>
+
+    <div class="spacer"></div>
+
+    <button
+      mat-button
+      color="warn"
+      (click)="
+        dialogData.cancelAction
+          ? dialogData.cancelAction()
+          : closeConfirmDialog()
+      "
+    >
+      {{ dialogData.cancelText || 'Cancel' }}
+    </button>
+
+    <button
+      mat-button
+      color="primary"
+      (click)="dialogData.okAction ? dialogData.okAction() : ''"
+    >
+      {{ dialogData.okText || 'OK' }}
+    </button>
+  </mat-dialog-actions>
+</div>

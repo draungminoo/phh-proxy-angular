@@ -1,0 +1,17 @@
+.prompt-dialog {
+  width: 480px;
+
+  .dialog-input {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .desc {
+    white-space: pre-wrap;
+  }
+}

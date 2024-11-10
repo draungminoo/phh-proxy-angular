@@ -1,0 +1,68 @@
+<div class="prompt-dialog">
+  <h1 mat-dialog-title>{{ dialogData.title }}</h1>
+
+  <div mat-dialog-content class="dialog-content">
+    @if (dialogData.multiLine) {
+      <mat-form-field class="dialog-input" appearance="outline">
+        <mat-label>{{ dialogData.placeholder ?? '' }}</mat-label>
+        <textarea
+          matInput
+          [placeholder]="dialogData.placeholder ?? ''"
+          [value]="dialogData.value ?? ''"
+          cdkTextareaAutosize="true"
+          cdkAutosizeMaxRows="20"
+          [formControl]="promptFormControl"
+        ></textarea>
+        @for (error of formErrors(); track error) {
+          <mat-error>{{ error }}</mat-error>
+        }
+      </mat-form-field>
+    } @else {
+      <mat-form-field class="dialog-input" appearance="outline">
+        <mat-label>{{ dialogData.placeholder ?? '' }}</mat-label>
+        <input
+          matInput
+          [placeholder]="dialogData.placeholder ?? ''"
+          [value]="dialogData.value ?? ''"
+          [formControl]="promptFormControl"
+        />
+        @for (error of formErrors(); track error) {
+          <mat-error>{{ error }}</mat-error>
+        }
+      </mat-form-field>
+    }
+
+    <br />
+
+    <span class="desc">{{ dialogData.desc }}</span>
+  </div>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-button
+      color="primary"
+      *ngIf="dialogData.neutralAction || dialogData.neutralText"
+      (click)="dialogData.neutralAction ? dialogData.neutralAction() : ''"
+    >
+      {{ dialogData.neutralText || 'Neutral' }}
+    </button>
+
+    <div class="spacer"></div>
+
+    <button
+      mat-button
+      color="warn"
+      (click)="dialogData.cancelAction ? dialogData.cancelAction() : close()"
+    >
+      {{ dialogData.cancelText || 'Cancel' }}
+    </button>
+
+    <button
+      mat-button
+      color="primary"
+      (click)="dialogData.okAction ? dialogData.okAction() : ''"
+    >
+      {{ dialogData.okText || 'OK' }}
+    </button>
+  </mat-dialog-actions>
+</div>
