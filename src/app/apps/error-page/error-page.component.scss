@@ -23,8 +23,13 @@
         flex-direction: column;
       }
 
-      button {
-        width: fit-content;
+      .actions {
+        display: flex;
+        gap: 16px;
+
+        button {
+          width: fit-content;
+        }
       }
     }
   }

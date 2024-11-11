@@ -17,7 +17,15 @@
           <p>App Version: {{ error?.version }}</p>
         </div>
 
-        <button mat-flat-button (click)="refreshPage()">REFRESH</button>
+        <div class="actions">
+          <div class="spacer"></div>
+
+          <button mat-stroked-button (click)="deleteOldToken()" color="warn">
+            DELETE TOKEN
+          </button>
+
+          <button mat-flat-button (click)="refreshPage()">REFRESH</button>
+        </div>
       </div>
     }
   </div>

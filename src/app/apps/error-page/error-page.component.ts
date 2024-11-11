@@ -4,6 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { AppStorageKeyEnums } from '../../../resources/enums/app-storage-key.enum';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { ToastService } from '../../services/toast/toast.service';
 import { ErrorItemType } from './error-page.type';
 
 @Component({
@@ -22,6 +24,8 @@ export class ErrorPageComponent {
   constructor(
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private dialogService: DialogService,
+    private toastService: ToastService,
   ) {
     window.bridge.getPageData('error', (data) => {
       console.log(data);
@@ -49,5 +53,32 @@ export class ErrorPageComponent {
       this.loadingMessage = `Reconnecting to ${this.error?.validatedURL}`;
       window.location.href = this.error?.reloadUrl ?? '';
     }
+  }
+
+  deleteOldToken() {
+    const dialog = this.dialogService.confirm({
+      title: 'DELETE OLD TOKEN',
+      message: 'Do you want to delete the old token?',
+      okText: 'DELETE',
+      okAction: () => {
+        window.bridge.deleteItem(
+          AppStorageKeyEnums.LOCAL_PROXY_TOKEN,
+          () => {
+            this.toastService.toast({
+              message: 'Token deleted successfully.',
+              config: { duration: 2000, panelClass: 'success-toast' },
+            });
+            dialog.close();
+          },
+          () => {
+            this.toastService.toast({
+              message: 'There is no token to delete.',
+              config: { duration: 2000, panelClass: 'error-toast' },
+            });
+            dialog.close();
+          },
+        );
+      },
+    });
   }
 }
