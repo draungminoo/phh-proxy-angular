@@ -58,7 +58,8 @@ export class ErrorPageComponent {
   deleteOldToken() {
     const dialog = this.dialogService.confirm({
       title: 'DELETE OLD TOKEN',
-      message: 'Do you want to delete the old token?',
+      message:
+        'Do you want to delete the old token? \n You must request a new token again to use PHH Proxy.',
       okText: 'DELETE',
       okAction: () => {
         window.bridge.deleteItem(
