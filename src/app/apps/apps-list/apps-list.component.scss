@@ -1,4 +1,6 @@
 .app-window {
+  user-select: none;
+
   .header {
     display: flex;
     flex-direction: row;
@@ -21,6 +23,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+      padding: 32px;
+      overflow: auto;
 
       .app-item {
         border-radius: 16px;

@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
@@ -17,7 +18,7 @@ import { AppItemType } from '../../apps-list.type';
 export class AppItemComponent implements OnChanges {
   @Input() item!: AppItemType;
 
-  constructor() {}
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
     for (const key in changes) {
@@ -25,5 +26,10 @@ export class AppItemComponent implements OnChanges {
         (this as any)[key] = changes[key].currentValue;
       }
     }
+  }
+
+  imageError() {
+    this.item.imageUrl = 'assets/logo.jpg';
+    this.cdr.detectChanges();
   }
 }

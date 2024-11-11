@@ -38,6 +38,7 @@ export class WelcomeComponent {
   ) {
     this.checkLocalToken();
     window.bridge.showAppMenu(false);
+    window.bridge.checkMinVersionValidity();
   }
 
   checkLocalToken() {

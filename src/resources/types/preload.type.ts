@@ -61,6 +61,18 @@ export type ElectronPreloadType = {
     data: Record<string, any>,
   ) => void;
 
+  // get available websites
+  getAvailableWebsites: (
+    success?: (...args: any[]) => any,
+    error?: (...args: any[]) => any,
+  ) => void;
+
+  // check min version validity
+  checkMinVersionValidity: () => void;
+
+  // open link externally
+  openLinkExternally: (url: string) => void;
+
   // default send and receive
   send: (channel: string, data: any) => void;
   receive: (channel: string, func: (...args: any[]) => any) => void;

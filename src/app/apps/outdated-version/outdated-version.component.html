@@ -1,0 +1,25 @@
+<div class="app-window">
+  <div class="body">
+    <img class="logo mat-elevation-z3" src="assets/logo.jpg" alt="Logo" />
+
+    <div class="container mat-elevation-z3">
+      <div class="title">CURRENT VERSION IS OUTDATED</div>
+
+      <div class="info">
+        <div class="min-version">
+          Min Version: {{ outdatedPageData?.minVersion }}
+        </div>
+        <div class="app-version">
+          App Version: {{ outdatedPageData?.version }}
+        </div>
+      </div>
+
+      @if (outdatedPageData?.downloadUrl) {
+        <button mat-flat-button (click)="downloadNewApp()">
+          <mat-icon>download</mat-icon>
+          DOWNLOAD NEW APP
+        </button>
+      }
+    </div>
+  </div>
+</div>

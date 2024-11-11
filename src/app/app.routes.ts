@@ -26,6 +26,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'outdated-page',
+        loadComponent: () =>
+          import('./apps/outdated-version/outdated-version.component').then(
+            (c) => c.OutdatedVersionComponent,
+          ),
+      },
+      {
         path: 'error-page',
         loadComponent: () =>
           import('./apps/error-page/error-page.component').then(

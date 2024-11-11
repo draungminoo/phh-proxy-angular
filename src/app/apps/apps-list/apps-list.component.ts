@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -24,24 +24,32 @@ import { AppItemComponent } from './components/app-item/app-item.component';
 export class AppsListComponent {
   loadingDialog = inject(MatDialog);
 
-  appsList: AppItemType[] = [
-    {
-      name: 'WhatsApp',
-      imageUrl: 'https://web.whatsapp.com/favicon.ico',
-      url: 'https://www.facebook.com',
-    },
-  ];
+  appsList: AppItemType[] = [];
 
   connectingApp: boolean = false;
   connectingAppUrl: string = '';
 
-  constructor() {
-    window.bridge.showAppMenu(true);
+  constructor(private cdr: ChangeDetectorRef) {
+    window.bridge.showAppMenu(false);
+    window.bridge.checkMinVersionValidity();
+
+    console.log('Getting available websites...');
+    window.bridge.getAvailableWebsites(
+      (data) => {
+        this.appsList = data;
+        this.cdr.detectChanges();
+      },
+      (error) => {
+        console.error(error);
+      },
+    );
   }
 
   loadUrl(url: string) {
     this.connectingApp = true;
     this.connectingAppUrl = url;
     window.bridge.loadUrl(url);
+    window.bridge.showAppMenu(true);
+    this.cdr.detectChanges();
   }
 }
