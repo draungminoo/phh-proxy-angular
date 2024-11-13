@@ -13,9 +13,11 @@ import { OutdatedVersionDataType } from './outdated-verstion.type';
 })
 export class OutdatedVersionComponent {
   outdatedPageData: OutdatedVersionDataType | null = null;
+  windowId: number = 0;
 
   constructor(private cdr: ChangeDetectorRef) {
-    window.bridge.showAppMenu(false);
+    this.windowId = window.bridge.getWindowId();
+    window.bridge.showAppMenu(this.windowId, false);
 
     window.bridge.getPageData('outdated-page', (data) => {
       this.outdatedPageData = data as any;

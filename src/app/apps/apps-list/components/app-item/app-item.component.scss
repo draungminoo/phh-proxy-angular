@@ -5,6 +5,7 @@
   width: 128px;
   gap: 16px;
   padding: 8px;
+  position: relative;
 
   .image {
     width: 100%;
@@ -14,5 +15,12 @@
   .name {
     font-size: large;
     font-weight: bold;
+  }
+
+  .open-app-in-new-window {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: white;
   }
 }

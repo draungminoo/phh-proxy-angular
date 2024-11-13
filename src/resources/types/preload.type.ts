@@ -8,6 +8,8 @@ export type GetItemDataType = {
 };
 
 export type ElectronPreloadType = {
+  getWindowId: () => number;
+
   setItem: (
     data: SetItemDataType,
     success?: (...args: any[]) => any,
@@ -25,8 +27,8 @@ export type ElectronPreloadType = {
   ) => void;
 
   // load
-  loadUrl: (url: string) => void;
-  loadProxyConfiguration: (token: string) => void;
+  loadUrl: (windowId: number, url: string) => void;
+  loadProxyConfiguration: (windowId: number, token: string) => void;
 
   // proxy token
   requestProxyToken: (
@@ -40,35 +42,33 @@ export type ElectronPreloadType = {
     error?: (...args: any[]) => any,
   ) => void;
 
-  // get device info
+  // get page data
   getDeviceInfo: (
     success?: (...args: any[]) => any,
     error?: (...args: any[]) => any,
   ) => void;
 
+  // get available websites
+  getAvailableWebsites: (
+    windowId: number,
+    success?: (...args: any[]) => any,
+    error?: (...args: any[]) => any,
+  ) => void;
+
   // app menu
-  showAppMenu: (status: boolean) => void;
+  showAppMenu: (windowId: number, status: boolean) => void;
 
   // page data
   setPageData: (page: string, data: Record<string, any>) => void;
-  getPageData: (
-    page: string,
-    success?: (data: Record<string, any>) => any,
-  ) => void;
+  getPageData: (page: string, success?: (...args: any[]) => any) => void;
   setPageKeyData: (
     page: string,
     key: string,
     data: Record<string, any>,
   ) => void;
 
-  // get available websites
-  getAvailableWebsites: (
-    success?: (...args: any[]) => any,
-    error?: (...args: any[]) => any,
-  ) => void;
-
-  // check min version validity
-  checkMinVersionValidity: () => void;
+  // min version validity
+  checkMinVersionValidity: (windowId: number) => void;
 
   // open link externally
   openLinkExternally: (url: string) => void;

@@ -20,6 +20,7 @@ export class ErrorPageComponent {
   error: ErrorItemType | null = null;
   connectingPage: boolean = false;
   loadingMessage: string = '';
+  windowId: number = 0;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -27,6 +28,8 @@ export class ErrorPageComponent {
     private dialogService: DialogService,
     private toastService: ToastService,
   ) {
+    this.windowId = window.bridge.getWindowId();
+
     window.bridge.getPageData('error', (data) => {
       console.log(data);
       this.error = data as any;
@@ -42,7 +45,7 @@ export class ErrorPageComponent {
       window.bridge.getItem(
         AppStorageKeyEnums.LOCAL_PROXY_TOKEN,
         (token) => {
-          window.bridge?.loadProxyConfiguration(token);
+          window.bridge?.loadProxyConfiguration(this.windowId, token);
         },
         (error) => {
           console.log(error);

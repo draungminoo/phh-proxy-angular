@@ -1,11 +1,13 @@
 import {
-  AfterViewInit,
   ChangeDetectorRef,
   Component,
   Input,
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppItemType } from '../../apps-list.type';
 
 @Component({
@@ -13,7 +15,7 @@ import { AppItemType } from '../../apps-list.type';
   templateUrl: './app-item.component.html',
   styleUrl: './app-item.component.scss',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule, MatIconModule, MatTooltipModule],
 })
 export class AppItemComponent implements OnChanges {
   @Input() item!: AppItemType;
@@ -31,5 +33,11 @@ export class AppItemComponent implements OnChanges {
   imageError() {
     this.item.imageUrl = 'assets/logo.jpg';
     this.cdr.detectChanges();
+  }
+
+  openAppInNewWindow(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.open(this.item.url, '_blank');
   }
 }

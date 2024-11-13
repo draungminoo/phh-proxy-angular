@@ -30,6 +30,7 @@ import { ProxyTokenReturnType } from './welcome.type';
 export class WelcomeComponent {
   message: string = '';
   isLoading: boolean = false;
+  windowId: number = 0;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -37,8 +38,9 @@ export class WelcomeComponent {
     private dialogService: DialogService,
   ) {
     this.checkLocalToken();
-    window.bridge.showAppMenu(false);
-    window.bridge.checkMinVersionValidity();
+    this.windowId = window.bridge.getWindowId();
+    window.bridge.showAppMenu(this.windowId, false);
+    window.bridge.checkMinVersionValidity(this.windowId);
   }
 
   checkLocalToken() {
@@ -49,6 +51,7 @@ export class WelcomeComponent {
       window.bridge.getItem(
         AppStorageKeyEnums.LOCAL_PROXY_TOKEN,
         (token) => {
+          console.log(token);
           this.proceedWithToken(token);
         },
         (error) => {
@@ -140,6 +143,6 @@ export class WelcomeComponent {
   }
 
   private proceedWithToken(token: string) {
-    window.bridge.loadProxyConfiguration(token);
+    window.bridge.loadProxyConfiguration(this.windowId, token);
   }
 }
