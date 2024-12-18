@@ -1,0 +1,19 @@
+<main class="container">
+  <button (click)="setProxy()">SET PROXY</button>
+
+  <br>
+  
+  <input #urlInput placeholder="Enter url..." [formControl]="urlForm"/>
+
+  <br>
+  
+  <div class="row">
+    <a [href]="targetUrl">
+      Visit URL ({{targetUrl}})
+    </a>
+  </div>
+
+  <iframe src="http://172.30.16.1:5500/web/index.html" frameborder="0"
+  style="width: 600px; height: 600px;"></iframe>
+  
+</main>
