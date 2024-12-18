@@ -1,6 +1,3 @@
-use tauri::menu::Menu;
-use tauri::menu::MenuItem;
-
 #[tauri::command]
 fn set_proxy(ip: &str, port: &str) {
     // Set the environment variables for the proxy
@@ -15,16 +12,19 @@ fn set_proxy(ip: &str, port: &str) {
     println!("Address: {}", address);
 }
 
+#[tauri::command]
+async fn close_splashscreen(window: Window) {
+  // Close splashscreen
+  window.get_window("splashscreen").expect("no window labeled 'splashscreen' found").close().unwrap();
+  // Show main window
+  window.get_window("main").expect("no window labeled 'main' found").show().unwrap();
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    // menu
-    let home = MenuItem::new("home".to_string(), "Home");
-    let menu = Menu::new().add_item(home);
-
     tauri::Builder::default()
-        .menu(menu)
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![set_proxy])
+        .invoke_handler(tauri::generate_handler![set_proxy, close_splashscreen])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

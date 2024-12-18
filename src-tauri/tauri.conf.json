@@ -16,6 +16,13 @@
         "width": 800,
         "height": 600,
         "devtools": true
+      },
+      {
+        "width": 800,
+        "height": 600,
+        "decorations": false,
+        "url": "web/splashscreen.html",
+        "label": "splashscreen"
       }
     ],
     "security": {

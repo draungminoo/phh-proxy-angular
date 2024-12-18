@@ -19,6 +19,10 @@ export class AppComponent {
         this.targetUrl = url;
       },
     });
+
+    setTimeout(() => {
+      invoke('close_splashscreen');
+    }, 5000);
   }
 
   setProxy() {
